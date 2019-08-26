@@ -1,0 +1,43 @@
+1.继承Thread接口
+  public static class Mythread extends Thread {
+    @Override
+    public void run() {
+      System.out.println("this is child Thread")
+    }
+    
+    public static void main(String[] args) {
+      MyThread mt = new MyThread();
+      mt.start();
+    }
+  };
+  
+  2.实现Runnable接口
+    public static class RunnableTask implements Runnable {
+      @Override
+      public void run() {
+        System.out.println("this is child Thread")
+      }
+      
+      public static void main(String[]  args) {
+        RunnableTask runnableTask = new RunnableTask();
+        new Thread(runnableTask).start();
+      }
+    }
+    
+    3.使用futureTask方式
+      public static class CallerTask implements Callable<String> {
+        public String call() throws Exception {
+          return "hello";
+        }
+        
+        public static void main(String[] args) {
+          FutureTask futureTask = new FutureTask(new CallerTask());
+          new Thread(futureTask).start();
+          try{
+            String result = futureTask.get();
+            System.out.println(result);
+          }catch(Exception e) {
+            e.printStackTrace();
+          }
+        }
+      }

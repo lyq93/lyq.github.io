@@ -9,4 +9,4 @@
   2.线程创建与运行的方式？<br>
   Java中有3种线程创建方式，分别为继承Thread类，实现Runnable接口，使用FutureTask方式。
 
-[abc](www.baidu.com)
+[code](./code/java并发编程之美/线程创建的方式)

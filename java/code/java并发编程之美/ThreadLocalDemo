@@ -1,0 +1,27 @@
+Public classs ThreadLocalTest {
+  
+  static ThreadLocal<String> tl = new ThreadLocal<String>();
+  
+  void print(String str) {
+    System.out.print(str + tl.get())  
+  }
+  
+  public static void main(String[] args) {
+    Thread threadOne = new Thread(new Runnable(){
+      public void run() {
+        tl.set("threadOne local voriable");
+        print("threadOne:");
+      }
+    });
+    
+    Thread threadTwo = new Thread(new Runnable(){
+      public void run() {
+        tl.set("threadTwo local voriable");
+        print("threadTwo:");
+      }
+    });
+    
+    threadOne.start();
+    threadTwo.start();
+  };
+}

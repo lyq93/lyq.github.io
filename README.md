@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages
+## 简介
 
 You can use the [editor on GitHub](https://github.com/lyq93/lyq.github.io/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 

@@ -8,9 +8,6 @@
 线程是进程中的一个实体，是进程的更细粒度的一个执行单元。进程是一次程序的运行过程，一个进程中至少有一个线程。一个进程中的所有线程共享进程的堆和方法区的资源，每个线程也有自己的私有程序计数器和栈空间。<br>
   2.线程创建与运行的方式？<br>
   Java中有3种线程创建方式，分别为继承Thread类，实现Runnable接口，使用FutureTask方式。<br>
-  (1)继承Thread类<br>
-  public Static Class MyThread extends Thread {
-    
-  }
+  
   
   

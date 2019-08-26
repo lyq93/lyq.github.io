@@ -31,4 +31,8 @@
   3.不可剥夺条件：线程持有的资源在线程执行完毕之前不会释放<br>
   4.环路等待条件：发生死锁的情况下必然形成线程-资源的环形链<br>
   <h3 id="1.5">1.5.ThreadLocal</h3><br>
+  (1)ThreadLocal的使用样例<br>
   
+[ThreadLocal代码样例](./code/java并发编程之美/ThreadLocalDemo) <br>
+  (2)ThreadLocal的实现原理<br>
+  ThreadLocal类调用set方法的时候，会把值写入到Thread类的变量threadLocals中，调用get方法的时候会从Thread类的threadLocals中把数据再读取出来。所以只要调用线程不结束，那么通过ThreadLocal类存入的数据就不会消失，除非调用了remove方法。threadLocals是个map结构，也就意味着一个线程可以关联多个ThreadLocal变量。

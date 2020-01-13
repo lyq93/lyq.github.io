@@ -4,7 +4,7 @@
 * [1.2shell变量与字符串](#1.2)
 * [1.3数组](#1.3)
 * [1.4shell脚本参数](#1.4)
-* [1.5ThreadLocal](#1.5)
+* [1.5shell运算符](#1.5)
 * [2.并发编程的其他基础知识](#2)
 * [2.1Java中共享变量的内存可见性问题](#2.1)
 * [2.2指令重排序](#2.2)
@@ -41,9 +41,47 @@
   $$: 输出当前进程的id号；<br>
   $?: 输出最后一个命令的状态，0是正常，其他值是出现错误；<br>
   $!: 输出运行的最后一个进程的id号；<br>
-  <h3 id="1.5">1.5.ThreadLocal</h3><br>
-  (1)ThreadLocal的使用样例<br>
-  
+  <h3 id="1.5">1.5.shell运算符</h3><br>
+  (1)算术运算符<br>
+  1、加法：+ `expr $a + $b`；<br>
+  2、减法：- `expr $a - $b`；<br>
+  3、乘法：* `expr $a \* $b`； 在mac中不需要转义<br>
+  4、除法：/ `expr $b / $a`；<br>
+  5、取余：% `expr $b % $a`；<br>
+  6、赋值：= a=$b<br>
+  7、相等：== [ $a == $b ]<br>
+  8、不相等 != [ $a != $b ]<br>
+  (2)关系运算符
+  1、相等：-eq [ $a -eq $b ]；<br>
+  2、不相等：-ne [ $a -ne $b ]；<br>
+  3、大于：-gt [ $a -gt $b ]；<br>
+  4、小于：-lt [ $a -lt $b ]；<br>
+  5、大于等于：-ge [ $a -ge $b ]；<br>
+  6、小于等于：-le [ $a -le $b ]；<br>
+  (3)布尔运算符
+  1、非运算符：！ [ !false ] true；<br>
+  2、或运算符：-o [ $a -lt 20 -o $b -gt 100 ]；<br>
+  3、与运算符：-a [ $a -lt 20 -a $b -gt 100 ]；<br>
+  (4)逻辑运算符
+  1、逻辑的and：&& [[ $a -lt 100 && $b -gt 100 ]]；<br>
+  2、逻辑的or：|| [[ $a -lt 100 || $b -gt 100 ]]；<br>
+  (5)字符串运算符
+  1、相等：= [ $a = $b ]；<br>
+  2、不相等：!= [ $a != $b ]；<br>
+  3、检查字符串长度是否为0：-z [ -z$a ]；为0返回true<br>
+  4、检查字符串长度是否不为0：-n [ -n$a ]；不为0返回true<br>
+  5、检查字符串是否为空：$ [ $a ]；不为空返回true<br>
+  (6)文件测试运算符
+  1、检测文件是否是块设备文件：-b [ -b $file ]；<br>
+  2、检测文件是否是字符设备文件：-c [ -c $file ]；<br>
+  3、检测文件是否是目录：-d [ -d $file ]； 在mac中不需要转义<br>
+  4、检测文件是否设置了SGID位：-g [ -g $file ]；<br>
+  5、检测文件是否设置了粘着位：-k [ -k $file ]；<br>
+  6、检测文件是否可读：-r [ -r $file ]<br>
+  7、检测文件是否可写：-w [ -w $file ]<br>
+  8、检测文件是否可执行 -x [ -x $file ]<br>
+  9、检测文件是否位空（文件大小大于0） -s [ -s $file ]<br>
+  10、检测文件（包括目录）是否存在 -e [ -e $file ]<br>
 [ThreadLocal代码样例](./code/java并发编程之美/ThreadLocalDemo) <br>
   (2)ThreadLocal的实现原理<br>
   ThreadLocal类调用set方法的时候，会把值写入到Thread类的变量threadLocals中，调用get方法的时候会从Thread类的threadLocals中把数据再读取出来。所以只要调用线程不结束，那么通过ThreadLocal类存入的数据就不会消失，除非调用了remove方法。threadLocals是个map结构，也就意味着一个线程可以关联多个ThreadLocal变量。

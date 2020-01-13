@@ -82,9 +82,6 @@
   8、检测文件是否可执行 -x [ -x $file ]<br>
   9、检测文件是否位空（文件大小大于0） -s [ -s $file ]<br>
   10、检测文件（包括目录）是否存在 -e [ -e $file ]<br>
-[ThreadLocal代码样例](./code/java并发编程之美/ThreadLocalDemo) <br>
-  (2)ThreadLocal的实现原理<br>
-  ThreadLocal类调用set方法的时候，会把值写入到Thread类的变量threadLocals中，调用get方法的时候会从Thread类的threadLocals中把数据再读取出来。所以只要调用线程不结束，那么通过ThreadLocal类存入的数据就不会消失，除非调用了remove方法。threadLocals是个map结构，也就意味着一个线程可以关联多个ThreadLocal变量。
 <h2 id="2">2.并发编程线程基础</h2>
   <h3 id="2.1">2.1.Java中共享变量的内存可见性问题</h3>
   (1)Java的内存模型<br>

@@ -1,0 +1,3 @@
+# spring boot Application Listeners
+org.springframework.context.ApplicationListener=\
+com.sz.lyq.configurationDemo.context.CustomizedSpringBootApplicationListener

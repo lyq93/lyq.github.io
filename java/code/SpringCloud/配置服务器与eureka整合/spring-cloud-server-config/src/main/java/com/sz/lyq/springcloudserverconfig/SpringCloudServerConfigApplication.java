@@ -1,0 +1,16 @@
+package com.sz.lyq.springcloudserverconfig;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.config.server.EnableConfigServer;
+
+@SpringBootApplication
+@EnableConfigServer
+public class SpringCloudServerConfigApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SpringCloudServerConfigApplication.class, args);
+//		System.out.println(System.getProperty("user.dir"));
+	}
+
+}

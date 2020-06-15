@@ -224,7 +224,83 @@
 
 > code !
 
+### 线程死锁
 
+#### 概念
+
+> 当两个或以上的线程在执行中，相互争夺资源而造成的互相等待的现象，在没有外力作用的情况下，一直等待下去。
+
+#### 条件
+
+- 互斥条件
+
+> 指线程对已获取的资源进行排他性使用。也就是该资源只能供一个线程访问
+
+- 请求并持有条件
+
+> 指一个线程已经持有了一个资源，而又要去请求一个新的资源，新的资源又被其他线程所持有，所以当前线程就会被阻塞，又不释放自身持有的资源。
+
+- 不可剥夺条件
+
+> 指线程持有的资源在自己使用完之前不能被其他线程抢占。
+
+- 环路等待条件
+
+> 指发生死锁的时候，一定存在一个线程-资源的环形链，即线程A等待线程b持有的资源，线程B等待线程C持有的资源，线程C等待线程A持有的资源。
+
+#### 避免死锁
+
+> 要避免死锁，只要破坏产生死锁条件的其中之一就可以了。在上述4个条件中，可以破坏的是请求并持有和环路等待条件。这2个条件很大程度上跟资源的请求顺序有关系。所以，合理的资源请求顺序是可以避免死锁的。
+
+### 用户线程和守护线程
+
+> java中的线程分为两类，一类是用户线程，一类是守护线程。他们之间的区别是，如果不存在用户线程的情况下，JVM会退出，不管是否存在守护线程。把线程设置为守护线程，只需要调用setDaemon方法即可。
+
+### ThreadLocal
+
+#### 概念
+
+> TheadLocal是JDK包提供的，提供了线程本地变量。也就是说，如果你创建一个ThreadLocal变量，那么访问这个变量的所有线程都会在本地有一个副本。当多个线程操作这个变量的时候，实际上操作的是自己本地内存里的变量，从而避免了线程安全的问题
+
+#### 原理
+
+> 核心就是Thread里面的threadLocals，变量是存在threadLocals里面的，而ThreadLocal更像是一个工具架子，调用set方法的时候，是通过获取到当前线程，拿到threadLocals变量，往变量里设置值。threadLocals可以理解为是一个定制版的hashMap，用hashMap的结构也就意味着，每个线程都可以关联多个ThreadLocal
+
+#### 源码展示
+
+- ThreadLocal#set
+
+> ```java
+> public void set(T value) {
+>   	// 获取当前线程
+>     Thread t = Thread.currentThread();
+>   	// 获取到threadLocals变量
+>     ThreadLocalMap map = getMap(t);
+>   	// 如果不是第一次设置值，就直接设置，否则创建对象
+>     if (map != null)
+>         map.set(this, value);
+>     else
+>         createMap(t, value);
+> }
+> ```
+
+- ThreadLocal#getMap
+
+> ```java
+> ThreadLocalMap getMap(Thread t) {
+>     return t.threadLocals; // 线程的threadLocals变量
+> }
+> ```
+
+- ThreadLocal#createMap
+
+> ```java
+> void createMap(Thread t, T firstValue) {
+>     t.threadLocals = new ThreadLocalMap(this, firstValue);
+> }
+> ```
+
+> 值得注意的一点是，从源码分析知道，变量是存在线程里面的，如果线程一直不结束，那么就有可能存在内存溢出的问题。所以，在使用完变量后，可以调用ThreadLocal的remove的方法移除变量。
 
 
 

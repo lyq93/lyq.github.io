@@ -9,7 +9,7 @@
 ​	简单工厂不算是一种模式，只能说是一种编程习惯。
 
 	### 相关类
-
+	
 	- ToyFactory.java (工厂类，生产玩具)
 	- AnimalToy.java (动物玩具接口)
 	- DuckToy.java (具体玩具实现类)
@@ -253,3 +253,8 @@ public class FactoryMethodMain {
 ### 思考
 
 > 工厂方法实现了不同区域生产不同的动物玩具，如果说这时候需要生产商生产动物玩具的一系列依赖产品，又该如何处理？
+
+### 应用
+
+> JDK的Calendar类
+

@@ -343,3 +343,29 @@
 > 构建镜像：docker build -t 新镜像名字:TAG
 >
 > 运行：docker run -it 新镜像名字:TAG
+
+### docker软件安装
+
+#### mysql安装
+
+> ```
+> docker pull mysql:5.7
+> 
+> sudo docker run -p 3306:3306 --name mysql \
+> -v /mydata/mysql/log:/var/log/mysql \
+> -v /mydata/mysql/data:/var/lib/mysql \
+> -v /mydata/mysql/conf:/etc/mysql \
+> -e MYSQL_ROOT_PASSWORD=root \
+> -d mysql:5.7
+> ```
+>
+> -p : 指定主机与容器端口号的映射
+>
+> -name：指定容器的名字
+>
+> -v：挂载容器卷，使得主机目录与容器对应目录映射上
+>
+> -e：mysql相关内容，当前命令内容为指定mysql的用户名和密码
+
+
+
